@@ -21,6 +21,15 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:9090']
 
+  # The job name is added as a label `job=` to any time series scraped from this config.
+  - job_name: 'grafana'
+
+    # Override the global default and scrape targets from this job every 5 seconds.
+    scrape_interval: 5s
+
+    static_configs:
+      - targets: ['localhost:3000']
+
   # Details to connect Prometheus with Spring Boot actuator end point to scrap the data
   # The job name is added as a label `job=` to any time series scraped from this config.
   - job_name: 'spring-actuator'
@@ -34,4 +43,4 @@ scrape_configs:
     #target end point. We are using the Docker, so local host will not work. You can change it with
     #localhost if not using the Docker.
     static_configs:
-      - targets: ['127.0.0.1:8080']
+      - targets: ['localhost:8080']
